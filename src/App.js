@@ -15,7 +15,7 @@ const App = () => (
 
 const Navigation = () => (
     <nav>
-            <li><NavLink to='/'>Home</NavLink></li>
+        <li><NavLink to='/'>Home</NavLink></li>
     </nav>
 );
 
