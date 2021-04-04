@@ -5,9 +5,9 @@ import Note from "./Note";
 
 
 const clickables = new Map([
-    ['door', {x1: 141, y1: 238, x2: 305, y2: 560}],
-    ['computer', {x1: 0.4558333333, y1: 0.36625, x2: 0.6291666667, y2: 0.52875}],
-    ['note', {x1: 834, y1: 299, x2: 890, y2: 359}]
+    ['door', { x1: 141, y1: 238, x2: 305, y2: 560 }],
+    ['computer', { x1: 0.4558333333, y1: 0.36625, x2: 0.6291666667, y2: 0.52875 }],
+    ['note', { x1: 0.74, y1: 0.39875, x2: 0.795, y2: 0.4775 }]
 ]);
 
 class Home extends Component {
@@ -15,6 +15,7 @@ class Home extends Component {
         super(props);
         this.state = {
             backgroundImage: null,
+            image: null,
 
             // clickables
             openComputer: false,
@@ -24,7 +25,7 @@ class Home extends Component {
             unlockedComputer: false
         };
 
-        this.canvas = React.createRef();
+        this.image = React.createRef();
     }
 
     componentDidMount() {
@@ -32,32 +33,6 @@ class Home extends Component {
     }
 
     componentDidUpdate() {
-        this.draw();
-    }
-
-    draw() {
-        let ctx = this.canvas.current.getContext("2d");
-        if (this.state.backgroundImage !== null) {
-            const wRatio = window.innerWidth / this.state.backgroundImage.width;
-            const hRatio = window.innerHeight / this.state.backgroundImage.height;
-            const ratio = Math.min(wRatio, hRatio) * 0.8;
-
-            ctx.canvas.width = this.state.backgroundImage.width * ratio;
-            ctx.canvas.height = this.state.backgroundImage.height * ratio;
-            ctx.drawImage(this.state.backgroundImage, 0, 0,
-                this.state.backgroundImage.width * ratio,
-                this.state.backgroundImage.height * ratio);
-
-
-            /*
-            ctx.canvas.width = this.state.backgroundImage.width;
-            ctx.canvas.height = this.state.backgroundImage.height;
-            ctx.drawImage(this.state.backgroundImage, 0, 0,
-                this.state.backgroundImage.width,
-                this.state.backgroundImage.height);
-
-             */
-        }
     }
 
     fetchAndSaveImage() {
@@ -66,22 +41,19 @@ class Home extends Component {
 
         background.onload = () => {
             this.setState({
-                backgroundImage: background
+                backgroundImage: background,
             })
         };
     }
 
     handleClick(e) {
-        const rect = this.canvas.current.getBoundingClientRect();
+        const rect = this.image.current.getBoundingClientRect();
         console.log({x: e.clientX - rect.left, y: e.clientY - rect.top});
         return { x: e.clientX - rect.left, y: e.clientY - rect.top };
     }
 
     hasClickedObject(click) {
-        console.log(this.canvas.current.getBoundingClientRect());
-        const rect = this.canvas.current.getBoundingClientRect();
-        // use rect.width, rect.height
-
+        const rect = this.image.current.getBoundingClientRect();
         for (let [key, coord] of clickables.entries()) {
             if (click.x >= rect.width * coord.x1 && click.x <= rect.width * coord.x2
                 && click.y >= rect.height * coord.y1 && click.y <= rect.height * coord.y2) {
@@ -137,8 +109,11 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <canvas
-                    ref={this.canvas}
+                <img
+                    ref={this.image}
+                    id={'backgroundImage'}
+                    src={ process.env.PUBLIC_URL + "room1.png" }
+                    alt="Room1"
                     onClick={(e) => this.handleClickOpen(e)}/>
                 <Prompt
                     open={this.state.openComputer}

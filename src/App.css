@@ -5,7 +5,10 @@ body {
 
  */
 
-
+#backgroundImage {
+    width: 70%;
+    height: 70%;
+}
 #app {
     margin: 0 auto !important;
     text-align: center;
