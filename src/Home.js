@@ -6,7 +6,7 @@ import Note from "./Note";
 
 const clickables = new Map([
     ['door', {x1: 141, y1: 238, x2: 305, y2: 560}],
-    ['computer', {x1: 518, y1: 279, x2: 705, y2: 391}],
+    ['computer', {x1: 0.4558333333, y1: 0.36625, x2: 0.6291666667, y2: 0.52875}],
     ['note', {x1: 834, y1: 299, x2: 890, y2: 359}]
 ]);
 
@@ -47,6 +47,16 @@ class Home extends Component {
             ctx.drawImage(this.state.backgroundImage, 0, 0,
                 this.state.backgroundImage.width * ratio,
                 this.state.backgroundImage.height * ratio);
+
+
+            /*
+            ctx.canvas.width = this.state.backgroundImage.width;
+            ctx.canvas.height = this.state.backgroundImage.height;
+            ctx.drawImage(this.state.backgroundImage, 0, 0,
+                this.state.backgroundImage.width,
+                this.state.backgroundImage.height);
+
+             */
         }
     }
 
@@ -63,17 +73,22 @@ class Home extends Component {
 
     handleClick(e) {
         const rect = this.canvas.current.getBoundingClientRect();
-        console.log({x: e.clientX - rect.left, y: e.clientY - rect.top})
-        return {x: e.clientX - rect.left, y: e.clientY - rect.top};
+        console.log({x: e.clientX - rect.left, y: e.clientY - rect.top});
+        return { x: e.clientX - rect.left, y: e.clientY - rect.top };
     }
 
     hasClickedObject(click) {
+        console.log(this.canvas.current.getBoundingClientRect());
+        const rect = this.canvas.current.getBoundingClientRect();
+        // use rect.width, rect.height
+
         for (let [key, coord] of clickables.entries()) {
-            if (click.x >= coord.x1 && click.x <= coord.x2
-                && click.y >= coord.y1 && click.y <= coord.y2) {
+            if (click.x >= rect.width * coord.x1 && click.x <= rect.width * coord.x2
+                && click.y >= rect.height * coord.y1 && click.y <= rect.height * coord.y2) {
                 return key;
             }
         }
+
         return null;
     }
 
