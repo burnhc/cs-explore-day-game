@@ -2,11 +2,13 @@ import React, {Component} from 'react';
 import Page1 from "./Page1";
 import Prompt from "./Prompt";
 import Note from "./Note";
+import Page3 from "./Page3";
 
 
 const clickables = new Map([
     ['door', { x1: 141, y1: 238, x2: 305, y2: 560 }],
     ['computer', { x1: 0.4558333333, y1: 0.36625, x2: 0.6291666667, y2: 0.52875 }],
+    ['graph', {x1: 0.305 , y1: 0.3025, x2: 0.429166666667, y2: 0.42 }],
     ['note', { x1: 0.74, y1: 0.39875, x2: 0.795, y2: 0.4775 }]
 ]);
 
@@ -15,16 +17,20 @@ class Home extends Component {
         super(props);
         this.state = {
             backgroundImage: null,
-            image: null,
 
             // clickables
             openComputer: false,
             openNote: false,
+            openGraph: false,
 
-            // solved puzzles
-            unlockedComputer: false
+            // storing state of solved puzzles
+            unlockedComputer: false,
+            solvedGraph: false,
+            solvedGraphEdges: new Set([]),
+            solvedGraphDots: new Set([])
         };
 
+        this.prompt = React.createRef();
         this.image = React.createRef();
     }
 
@@ -85,8 +91,11 @@ class Home extends Component {
                     openNote: !this.state.openNote
                 })
                 break;
-            case 'door':
-                console.log("clicked door");
+            case 'graph':
+                console.log("clicked graph");
+                this.setState({
+                    openGraph: !this.state.openGraph
+                })
                 break;
             default:
                 break;
@@ -101,9 +110,24 @@ class Home extends Component {
                 })
                 console.log("unlockedComputer");
                 break;
+            case 'solvedGraph':
+                this.setState({
+                    solvedGraph: true
+                })
+                console.log("solved graph");
+                break;
             default:
                 break;
         }
+    }
+
+    storeGraphState(vertexSet, edgeSet) {
+        this.setState({
+            solvedGraphDots: vertexSet,
+            solvedGraphEdges: edgeSet
+        },
+            () =>
+                console.log(this.state.solvedGraphEdges));
     }
 
     render() {
@@ -132,6 +156,19 @@ class Home extends Component {
                     handleClose={() => this.handleToggleDialog('note')}
                     title={"A note is taped to the wall."}
                     componentToOpen={<Note/>}/>
+                <Prompt
+                    ref={this.prompt}
+                    open={this.state.openGraph}
+                    handleClose={() => this.handleToggleDialog('graph')}
+                    title={"Hamiltonian"}
+                    componentToOpen={
+                        <Page3
+                            puzzle={() => this.handlePuzzleSolved('solvedGraph')}
+                            puzzleSolved={ this.state.solvedGraph }
+                            solvedGraphEdges={ this.state.solvedGraphEdges }
+                            solvedGraphDots={ this.state.solvedGraphDots }
+                            storeGraphState={ (v,e) => this.storeGraphState(v,e) }
+                        />}/>
             </div>
         )
     }

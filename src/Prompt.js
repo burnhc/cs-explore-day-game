@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { Box, IconButton } from "@material-ui/core";
+import {Box, IconButton} from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 
 class Prompt extends Component {
