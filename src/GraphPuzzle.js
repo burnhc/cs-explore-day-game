@@ -4,7 +4,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 
 const DOT_RADIUS = 10;
 
-class Page3 extends Component {
+class GraphPuzzle extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -48,6 +48,12 @@ class Page3 extends Component {
 
     componentDidMount() {
         this.initializeCanvas();
+        // weird hack bc visitedDots wasn't resetting on unmount for some reason
+        if (!this.state.verified && this.state.visitedDots.size !== 0) {
+            this.setState({
+                visitedDots: new Set([])
+            })
+        }
     }
 
     componentDidUpdate() {
@@ -220,13 +226,12 @@ class Page3 extends Component {
             ctx.closePath();
             edge.drawn = true;
             this.state.edgesDrawn.add(edge);
-            console.log(this.state.edgesDrawn);
         }
     }
 
     checkAllDotsVisited() {
         if (!this.state.verified &&
-            this.state.visitedDots.size === this.state.dots.size) {
+                this.state.visitedDots.size === this.state.dots.size) {
             this.props.puzzle();
             this.props.storeGraphState(this.state.visitedDots, this.state.edgesDrawn);
             this.setState({
@@ -289,4 +294,4 @@ class Page3 extends Component {
     }
 }
 
-export default Page3;
+export default GraphPuzzle;

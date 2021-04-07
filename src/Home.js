@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import Page1 from "./Page1";
+import TerminalPuzzle from "./TerminalPuzzle";
 import Prompt from "./Prompt";
-import Note from "./Note";
-import Page3 from "./Page3";
+import NotePuzzle from "./NotePuzzle";
+import GraphPuzzle from "./GraphPuzzle";
 
 
 const clickables = new Map([
@@ -61,8 +61,10 @@ class Home extends Component {
     hasClickedObject(click) {
         const rect = this.image.current.getBoundingClientRect();
         for (let [key, coord] of clickables.entries()) {
-            if (click.x >= rect.width * coord.x1 && click.x <= rect.width * coord.x2
-                && click.y >= rect.height * coord.y1 && click.y <= rect.height * coord.y2) {
+            if (click.x >= rect.width * coord.x1
+                && click.x <= rect.width * coord.x2
+                && click.y >= rect.height * coord.y1
+                && click.y <= rect.height * coord.y2) {
                 return key;
             }
         }
@@ -146,7 +148,7 @@ class Home extends Component {
                         "The computer is unlocked, but it looks a bit strange." :
                         "Seems like the computer is locked."}
                     componentToOpen={
-                        <Page1
+                        <TerminalPuzzle
                             puzzle1={() => this.handlePuzzleSolved('unlockedComputer')}
                             puzzle1Solved={this.state.unlockedComputer}
                         />}/>
@@ -155,14 +157,14 @@ class Home extends Component {
                     maxWidth={'xs'}
                     handleClose={() => this.handleToggleDialog('note')}
                     title={"A note is taped to the wall."}
-                    componentToOpen={<Note/>}/>
+                    componentToOpen={<NotePuzzle/>}/>
                 <Prompt
                     ref={this.prompt}
                     open={this.state.openGraph}
                     handleClose={() => this.handleToggleDialog('graph')}
                     title={"Hamiltonian"}
                     componentToOpen={
-                        <Page3
+                        <GraphPuzzle
                             puzzle={() => this.handlePuzzleSolved('solvedGraph')}
                             puzzleSolved={ this.state.solvedGraph }
                             solvedGraphEdges={ this.state.solvedGraphEdges }

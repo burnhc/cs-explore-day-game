@@ -7,7 +7,7 @@ import { InputAdornment, TextField, createMuiTheme,
          MuiThemeProvider, IconButton } from "@material-ui/core";
 import { ArrowForwardRounded, Lock } from "@material-ui/icons";
 
-class Page1 extends Component {
+class TerminalPuzzle extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -173,4 +173,4 @@ class Page1 extends Component {
     }
 }
 
-export default Page1;
+export default TerminalPuzzle;

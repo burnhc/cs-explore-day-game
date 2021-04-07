@@ -1,6 +1,6 @@
 import {DialogContent} from "@material-ui/core";
 
-const Note = () => {
+const NotePuzzle = () => {
     return (
         <DialogContent style={{backgroundColor: "#f0e384"}}>
             <p id={'note'}>HelloWorld123</p>
@@ -8,4 +8,4 @@ const Note = () => {
     );
 }
 
-export default Note;
+export default NotePuzzle;
