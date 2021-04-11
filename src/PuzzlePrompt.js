@@ -4,10 +4,11 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import {Box, IconButton} from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 
-class Prompt extends Component {
+class PuzzlePrompt extends Component {
     render() {
         return (
             <Dialog
+                disableScrollLock
                 open={this.props.open}
                 onBackdropClick={() => this.props.handleClose()}
                 fullWidth
@@ -28,4 +29,4 @@ class Prompt extends Component {
     }
 }
 
-export default Prompt;
+export default PuzzlePrompt;

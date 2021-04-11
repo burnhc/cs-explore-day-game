@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import "./App.css";
 import Snackbar from '@material-ui/core/Snackbar';
+import Typography from '@material-ui/core/Typography';
 
 const DOT_RADIUS = 10;
 
@@ -10,16 +11,16 @@ class GraphPuzzle extends Component {
         this.state = {
             clickedDot: null,
             dots: new Map(
-                [[1, {x: 26, y: 240}], [2, {x: 325, y: 18}],
-                    [3, {x: 627, y: 240}], [4, {x: 513, y: 592}],
-                    [5, {x: 137, y: 592}], [6, {x: 120, y: 268}],
-                    [7, {x: 240, y: 210}], [8, {x: 323, y: 117}],
-                    [9, {x: 414, y: 213}], [10, {x: 532, y: 269}],
-                    [11, {x: 468, y: 387}], [12, {x: 452, y: 511}],
-                    [13, {x: 323, y: 487}], [14, {x: 196, y: 511}],
-                    [15, {x: 179, y: 379}], [16, {x: 276, y: 263}],
-                    [17, {x: 376, y: 263}], [18, {x: 408, y: 363}],
-                    [19, {x: 322, y: 424}], [20, {x: 239, y: 361}]]),
+                [[1, {x: 26 * 0.7, y: 240 * 0.7}], [2, {x: 325 * 0.7, y: 18 * 0.7}],
+                    [3, {x: 627 * 0.7, y: 240 * 0.7}], [4, {x: 513 * 0.7, y: 592 * 0.7}],
+                    [5, {x: 137 * 0.7, y: 592 * 0.7}], [6, {x: 120 * 0.7, y: 268 * 0.7}],
+                    [7, {x: 240 * 0.7, y: 210 * 0.7}], [8, {x: 323 * 0.7, y: 117 * 0.7}],
+                    [9, {x: 414 * 0.7, y: 213 * 0.7}], [10, {x: 532 * 0.7, y: 269 * 0.7}],
+                    [11, {x: 468 * 0.7, y: 387 * 0.7}], [12, {x: 452 * 0.7, y: 511 * 0.7}],
+                    [13, {x: 323 * 0.7, y: 487 * 0.7}], [14, {x: 196 * 0.7, y: 511 * 0.7}],
+                    [15, {x: 179 * 0.7, y: 379 * 0.7}], [16, {x: 276 * 0.7, y: 263 * 0.7}],
+                    [17, {x: 376 * 0.7, y: 263 * 0.7}], [18, {x: 408 * 0.7, y: 363 * 0.7}],
+                    [19, {x: 322 * 0.7, y: 424 * 0.7}], [20, {x: 239 * 0.7, y: 361 * 0.7}]]),
             possibleEdges:
                 [{dot1: 1, dot2: 2}, {dot1: 2, dot2: 3},
                     {dot1: 3, dot2: 4}, {dot1: 4, dot2: 5},
@@ -66,7 +67,7 @@ class GraphPuzzle extends Component {
         let canvas = this.canvas.current;
         let ctx = canvas.getContext("2d");
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "#200081";
+        ctx.fillStyle = "#4F4659";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         this.initializePossibleEdges();
@@ -79,7 +80,7 @@ class GraphPuzzle extends Component {
             if (!this.state.visitedDots.has(id)) {
                 ctx.beginPath();
                 ctx.arc(dot.x, dot.y, DOT_RADIUS, 0, 2 * Math.PI);
-                ctx.fillStyle = "#4102ff";
+                ctx.fillStyle = "#6c5f7a";
                 ctx.fill();
                 ctx.closePath();
             } else if (this.state.verified) {
@@ -101,7 +102,7 @@ class GraphPuzzle extends Component {
             ctx.moveTo(dot1.x, dot1.y);
             ctx.lineTo(dot2.x, dot2.y);
             ctx.lineWidth = 5;
-            ctx.strokeStyle = "#4102ff";
+            ctx.strokeStyle = "#6c5f7a";
             ctx.stroke();
             ctx.closePath();
         }
@@ -188,7 +189,7 @@ class GraphPuzzle extends Component {
             ctx.arc(dot.x, dot.y, DOT_RADIUS, 0, 2 * Math.PI);
 
             if (!this.state.visitedDots.has(id)) {
-                ctx.fillStyle = ctx.isPointInPath(pos.x, pos.y) ? '#fff' : "#4102ff";
+                ctx.fillStyle = ctx.isPointInPath(pos.x, pos.y) ? '#fff' : "#6c5f7a";
             } else {
                 ctx.fillStyle = '#fff';
             }
@@ -267,7 +268,7 @@ class GraphPuzzle extends Component {
 
     render() {
         return (
-            <div>
+            <div id={'graph'}>
                 <Snackbar
                     anchorOrigin={{vertical: 'top', horizontal: 'center'}}
                     open={this.state.openAlreadyVisitedError}
@@ -283,12 +284,32 @@ class GraphPuzzle extends Component {
                     onClose={() => this.setState({openInvalidEdgeError: false})}
                 />
                 <canvas
-                    id={'graph'}
+                    id={"graph-canvas"}
                     ref={this.canvas}
-                    width={960}
-                    height={800}
+                    width={460}
+                    height={440}
                     onClick={!this.state.verified ? this.checkForDot : null}
                     onMouseMove={!this.state.verified ? this.drawDots : null}/>
+                    <div id={'graph-desc'}>
+                        <Typography>
+                            <p>
+                                Given these dots connected by lines, can we trace a path that touches
+                                all of the dots, but that takes each line only once?
+                            </p>
+                            <p>
+                                This might seem straightforward to accomplish. But believe it or not, this
+                                is currently one of the most difficult problems to have a computer solve! It's
+                                known famously as the "Hamiltonian Path" problem, named after mathematician
+                                William Rowan Hamilton who came up with the puzzle in 1857.
+                            </p>
+                            <p>
+                                What makes this problem so complicated is that there are many different paths
+                                a computer would have to try. To be exact, the puzzle on the left has a whopping
+                                <b> 2.6525286 * 10<sup>32 </sup></b> permutations for a computer to check, which
+                                would take a very long time!
+                            </p>
+                        </Typography>
+                    </div>
             </div>
         );
     }

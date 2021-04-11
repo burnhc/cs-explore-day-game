@@ -1,7 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
+import { MuiThemeProvider } from "@material-ui/core";
+import { mainTheme } from "./Theme";
 
 const LinkButton = (props) => {
     const {
@@ -15,6 +17,7 @@ const LinkButton = (props) => {
     } = props
 
     return (
+        <MuiThemeProvider theme={ mainTheme }>
         <Button
             {...rest}
             onClick={(event) => {
@@ -22,6 +25,7 @@ const LinkButton = (props) => {
                 history.push(to)
             }}
         />
+        </MuiThemeProvider>
     )
 }
 

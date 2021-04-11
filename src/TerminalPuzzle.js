@@ -19,7 +19,7 @@ class TerminalPuzzle extends Component {
     }
 
     verifyPassword() {
-        if (this.state.passwordInput !== 'HelloWorld123') {
+        if (this.state.passwordInput !== 'HelloWorld3') {
             this.setState({
                 passwordError: true
             })
@@ -78,8 +78,9 @@ class TerminalPuzzle extends Component {
         );
 
         const customState = defaultState.setOutputs(newOutputs);
-        const color = "#fff"; // set everything to white
-        const theme = createMuiTheme({
+        
+        const color = "#fff";
+        const terminalTheme = createMuiTheme({
             typography: {
                 fontFamily: 'monospace',
                 fontSize: 18
@@ -115,13 +116,14 @@ class TerminalPuzzle extends Component {
                 }
             }
         });
+        
 
         return (
             <div>
                 <div
                     className={ this.state.unlocked ? 'hidden' : '' }
                     id={ 'computerPasswordPage' }>
-                    <MuiThemeProvider theme={ theme }>
+                    <MuiThemeProvider theme={ terminalTheme }>
                         <TextField
                             type="password"
                             label="Password"
@@ -156,7 +158,7 @@ class TerminalPuzzle extends Component {
                     <ReactTerminal
                         theme={{
                             background: '#141313',
-                            promptSymbolColor: '#81EC0D',
+                            PuzzlePromptSymbolColor: '#81EC0D',
                             commandColor: '#81EC0D',
                             outputColor: '#FFFFFF',
                             errorOutputColor: '#FF0000',
@@ -165,7 +167,7 @@ class TerminalPuzzle extends Component {
                             fontFamily: 'monospace',
                             height: '50vh',
                         }}
-                        promptSymbol='> '
+                        PuzzlePromptSymbol='> '
                         emulatorState={ customState } />
                 </div>
             </div>

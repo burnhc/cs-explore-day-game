@@ -1,22 +1,41 @@
 import React from 'react';
 import './App.css';
 import { NavLink } from 'react-router-dom';
-import Main from "./Main";
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Router from "./Router";
+import { MuiThemeProvider } from "@material-ui/core";
+import { mainTheme } from "./Theme";
 
-const App = () => (
-    <div>
-        <h1>CS Explore Day</h1>
-        <Navigation />
-        <div id='app'>
-            <Main />
-        </div>
-    </div>
-);
+const useStyles = makeStyles((theme) => ({
+    appBar: {
+        zIndex: theme.zIndex.drawer + 1,
+    },
+}));
 
-const Navigation = () => (
-    <nav>
-        <li><NavLink to='/'>Home</NavLink></li>
-    </nav>
-);
+export default function App() {
+  const classes = useStyles();
 
-export default App;
+  return (
+    <MuiThemeProvider theme={ mainTheme }>
+      <div className={classes.root}>
+        <CssBaseline />
+        <AppBar
+          className={classes.appBar}
+          position="sticky">
+          <Toolbar>
+            <Typography variant="h6" noWrap>
+                CS Explore Day
+            </Typography>
+          </Toolbar>
+          </AppBar>
+          <Router>
+              <Router />
+          </Router>
+      </div>
+    </MuiThemeProvider>
+  );
+}

@@ -1,16 +1,45 @@
-/*
 body {
     overflow: hidden;
 }
+code {
+    font-family: Consolas,"courier new";
+    color: #fc7b5b;
+    background-color: #f3f3f3;
+    padding: 2px;
+    border-radius: 7px;
+    font-size: 105%;
+    margin: 5px;
+}
 
- */
+
+#NavigationRoomPage {
+    display:flex;
+    flex-direction:row;
+    margin-top: 10px;
+}
+
+#NavigationRoomLeft {
+    width: 50%;
+    height: 100%;
+    position: fixed;
+}
+
+#NavigationRoomRight {
+    overflow-y: scroll;
+    padding:50px;
+}
 
 #backgroundImage {
-    width: 60%;
-    height: 60%;
+    width: 100%;
+    height: 100%;
 }
-#app {
+
+#welcome {
     margin: 0 auto !important;
+    text-align: center;
+}
+
+#instructionsButton {
     text-align: center;
 }
 
@@ -25,13 +54,39 @@ body {
     font-size: 1.1rem;
 }
 
+.blockText {
+    background-color: #F9F9ED;
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ddddd2;
+    border-radius: 7px;
+}
 .hidden {
     display: none !important;
 }
 
 #note {
-    text-align: center;
-    font-size: 1.5rem;
-    color: #f0e384;
-    height: 20vh;
+    font-size: 1.2rem;
+    font-family: monospace;
+    background-color: #f7edc0;
+    color: #f7edc0;
+    height: 30vh;
+}
+
+#graph {
+    background-color: #4F4659;
+    color: #fff;
+    font-size: 1rem;
+    padding-right: 30px;
+    padding-top: 10px;
+}
+
+#graph-canvas {
+    margin: 50px;
+    float: left;
+}
+
+#graph-desc {
+    overflow-y: auto;
 }
