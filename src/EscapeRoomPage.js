@@ -1,13 +1,16 @@
-import React from 'react';
+import { React, Component } from 'react';
 import './App.css';
 import EscapeRoom from './EscapeRoom';
-import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Toolbar from '@material-ui/core/Toolbar';
+import { withStyles } from "@material-ui/core/styles";
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Instructions from "./Instructions";
 
 const drawerWidth = '30%';
 
-const useStyles = makeStyles((theme) => ({
+const styles = theme => ({
   root: {
     display: 'flex',
     flexShrink: 0,
@@ -18,13 +21,46 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     width: drawerWidth,
   },
-}));
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: '#fff',
+  },
+});
 
-export default function EscapeRoomPage() {
-    const classes = useStyles();
+class EscapeRoomPage extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      open: true,
+      openInstructions: false
+    };
+  }
+  
+  handleClose = () => {
+    this.setState({
+      open: false,
+      openInstructions: true
+    })
+  };
 
+  handleCloseInstructions = () => {
+    this.setState({
+      openInstructions: false
+    })
+  }
+
+  render () {
+    const { classes } = this.props;
     return (
         <div className={classes.root}>
+            <Backdrop
+              className={classes.backdrop}
+              open={this.state.open}>
+                <CircularProgress color="inherit" />
+              </Backdrop>
+              <Instructions 
+                    open={this.state.openInstructions}
+                    handleClose={() => this.handleCloseInstructions()}/>
             <Drawer
               className={classes.drawer}
               variant="permanent"
@@ -32,23 +68,25 @@ export default function EscapeRoomPage() {
               paper: classes.drawerPaper,
               }}>
               <Toolbar />
+              <br/>
               <iframe
-                title='hello' 
-                height="100%"
-                width="100%"
-                src="https://replit.com/@burnhc/cs-explore-day-terminal?lite=true&outputonly=1"
-                scrolling="no"
-                frameBorder="no"
-                allowtransparency="true"
-                allowFullScreen
-                sandbox="allow-forms allow-pointer-lock 
-                        allow-popups allow-same-origin
-                        allow-scripts allow-modals">
-            </iframe>
+                    title='pythonEditor'
+                    onLoad={ this.handleClose }
+                    height="100%"
+                    width="100%"
+                    src="https://burnhc.github.io/browser-python-repl/"
+                    scrolling="no"
+                    frameBorder="no"
+                    allowtransparency="true"
+                    allowFullScreen
+                    sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals">
+                </iframe>
           </Drawer>
           <div>
             <EscapeRoom />
           </div>
         </div>
     )
+  }
 }
+export default withStyles(styles, { withTheme: true }) (EscapeRoomPage);

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import TerminalPuzzle from "./TerminalPuzzle";
 import PuzzlePrompt from "./PuzzlePrompt";
-import Instructions from "./Instructions";
 import NotePuzzle from "./NotePuzzle";
 import GraphPuzzle from "./GraphPuzzle";
 
@@ -17,7 +16,6 @@ class HomePage extends Component {
         super(props);
         this.state = {
             backgroundImage: null,
-            openInstructions: false,
 
             // clickables
             openComputer: false,
@@ -37,16 +35,9 @@ class HomePage extends Component {
 
     componentDidMount() {
         this.fetchAndSaveImage();
-        this.openInstructions();
     }
 
     componentDidUpdate() {
-    }
-
-    openInstructions() {
-        this.setState({
-            openInstructions: true
-        })
     }
     
     fetchAndSaveImage() {
@@ -146,9 +137,6 @@ class HomePage extends Component {
     render() {
         return (
             <div>
-                <Instructions 
-                    open={this.state.openInstructions}
-                    handleClose={() => this.handleToggleDialog('instructions')}/>
                 <img
                     ref={this.image}
                     id={'backgroundImage'}

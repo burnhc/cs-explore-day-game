@@ -1,11 +1,14 @@
+import { React, Component } from "react";
 import CheatSheet from "./CheatSheet";
 import Drawer from '@material-ui/core/Drawer';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from "@material-ui/core/styles";
 import Toolbar from '@material-ui/core/Toolbar';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const drawerWidth = '50%';
 
-const useStyles = makeStyles((theme) => ({
+const styles = theme => ({
     drawer: {
       width: drawerWidth,
       position: 'absolute',
@@ -13,20 +16,40 @@ const useStyles = makeStyles((theme) => ({
     },
     drawerPaper: {
       width: drawerWidth,
-    }
-  }));
+    },
+    backdrop: {
+      zIndex: theme.zIndex.drawer + 1,
+      color: '#fff',
+    },
+  });
 
-export default function NavigationRoomPage() {
-    const classes = useStyles();
+  class NavigationRoomPage extends Component {
+    state = {
+      open: true
+    };
+    
+    handleClose = () => {
+      this.setState({
+        open: false
+      })
+    };
 
-    return (
+    render () {
+      const { classes } = this.props;
+      return (
         <div id={'NavigationRoomPage'}>
+                <Backdrop
+                  className={classes.backdrop}
+                  open={this.state.open}>
+                  <CircularProgress color="inherit" />
+                </Backdrop>
             <div id={'NavigationRoomLeft'}>
                 <iframe
-                    title='hello'
+                    title='pythonEditor'
+                    onLoad={ this.handleClose }
                     height="100%"
                     width="100%"
-                    src="https://replit.com/@burnhc/cs-explore-day?lite=true"
+                    src="https://burnhc.github.io/browser-python-repl/"
                     scrolling="no"
                     frameBorder="no"
                     allowtransparency="true"
@@ -47,5 +70,7 @@ export default function NavigationRoomPage() {
             </div>
           </Drawer>
         </div>
-    )
+      )
+    }
 }
+export default withStyles(styles, { withTheme: true }) (NavigationRoomPage);
