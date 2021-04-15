@@ -6,8 +6,8 @@ This project was bootstrapped with [React](https://github.com/facebook/create-re
 ## Requirements
 
 Before cloning this project, please install these on your system:
-* [http://git-scm.com/downloads](Git)
-* [https://www.npmjs.com/get-npm](npm and Node.js)
+* [Git](http://git-scm.com/downloads)
+* [npm and Node.js](https://www.npmjs.com/get-npm)
 
 ## Setup
 
