@@ -95,7 +95,3 @@ code {
     float: left;
     cursor: pointer;
 }
-
-#graph-desc {
-    overflow: scroll;
-}
