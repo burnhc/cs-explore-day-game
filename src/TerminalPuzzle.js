@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ReactTerminal from 'react-terminal-component';
+import { instructionstxt, datatxt, headtxt, linktxt, pathtxt, codepy } from './TerminalFileSystem';
 import { EmulatorState, OutputFactory, CommandMapping,
          FileSystem, Outputs, defaultCommandMapping } from 'javascript-terminal';
 import "./App.css";
@@ -36,12 +37,13 @@ class TerminalPuzzle extends Component {
         const defaultState = EmulatorState.create({
             'fs': FileSystem.create({
                 '/': {canModify: false},
-                '/instructions.txt': {
-                    content: 'Figure out the password by searching for hidden clues in this computer.\n' +
-                        'The SecretFolder/ might be a good place to start...',
-                    canModify: false},
-                '/SecretFolder': {},
-                '/SecretFolder/AnotherFolder/secret.txt': {content: 'The password is: oogabooga'},
+                '/instructions.txt': {content: instructionstxt},
+                '/TOP_SECRET_FOLDER/data.txt': {content: datatxt},
+                '/TOP_SECRET_FOLDER/head.txt': {content: headtxt},
+                '/TOP_SECRET_FOLDER/AnotherFolder/link.txt': {content: linktxt},
+                '/TOP_SECRET_FOLDER/Folder2/path.txt': {content: pathtxt},
+                '/TOP_SECRET_FOLDER/Folder2/Folder3/code.py': {content: codepy},
+                '/TOP_SECRET_FOLDER/Folder2/Folder3/Folder4': {},
             }),
             'commandMapping': CommandMapping.create({
                 ...defaultCommandMapping,
@@ -49,17 +51,19 @@ class TerminalPuzzle extends Component {
                     'function': () => {
                         return {
                             output: OutputFactory.makeTextOutput(
-                                "TIPS: All commands are case-sensitive.\n" +
-                                "      Press UP/DOWN arrow keys to cycle through your command history.\n\n" +
-                                "Command    Description\n" +
-                                "-----------------------------------------------------------------------------------------------\n" +
-                                "cat        Use 'cat [fileName.txt]' to show the contents of a file.\n" +
-                                "cd         Use 'cd /[folderName]' to go into a folder. Use 'cd ./' to go back.\n" +
-                                "head       Use 'head -n [n] [fileName.txt]' to show the first n lines of a file.\n" +
-                                "help       Use 'help' to show the available terminal commands.\n" +
-                                "ls         Use 'ls' to show the files in the folder you're in.\n" +
+                                "\nCOMMAND    DESCRIPTION  (replace [] with your file/folder name)\n" +
+                                "------------------------------------------------------------------------------------\n" +
+                                "cat        Use 'cat [fileName]' to show the contents of a file.\n" +
+                                "cd         Use 'cd [folderName]' to open a folder. Use 'cd ..' to go back.\n" +
+                                "ls         Use 'ls' to list the files in the folder you're in.\n" +
                                 "pwd        Use 'pwd' to show the path of the folder you're in.\n" +
-                                "tail       Use 'tail -n [n] [fileName.txt]' to show the last n lines of a file.\n"
+                                "head       Use 'head -n [x] [fileName]' to show the first x lines of a file.\n" +
+                                "tail       Use 'tail -n [x] [fileName]' to show the last x lines of a file.\n" +
+                                "help       Use 'help' to show the available commands (you just did this).\n\n" +
+                                "* For simplicity, you should be in the same folder as the file you want to use.\n\n" +
+                                "TIPS: Commands are case-sensitive.\n" +
+                                "      Use UP/DOWN arrow keys to cycle through your command history.\n" +
+                                "      Use TAB to autocomplete commands.\n\n"
                             )
                         };
                     },
@@ -72,8 +76,14 @@ class TerminalPuzzle extends Component {
         const newOutputs = Outputs.addRecord(
             defaultOutputs, OutputFactory.makeTextOutput(
                 "Welcome to the computer terminal.\n" +
-                "This a tool that programmers use to interact with the computer.\n\n" +
-                "Enter 'help' for a list of available commands.\n\n"
+                "This a tool that programmers use to interact with the computer.\n" +
+                "Type commands next to the $ and execute them by pressing ENTER.\n\n" +
+                "Let's get started...\n" +
+                "1. List the files in your current folder:            ls\n" +
+                "2. See the contents of the file 'instructions.txt':  cat instructions.txt\n" +
+                "3. Open the folder 'TOP_SECRET_FOLDER/':             cd TOP_SECRET_FOLDER\n" +
+                "4. Check the folder you're in:                       pwd\n\n" +
+                "Type 'help' to see other useful commands and tips! :)\n\n"
           )
         );
 
@@ -82,7 +92,7 @@ class TerminalPuzzle extends Component {
         const color = "#fff";
         const terminalTheme = createMuiTheme({
             typography: {
-                fontFamily: 'monospace',
+                fontFamily: 'Inconsolata',
                 fontSize: 18
             },
             palette: {
@@ -154,20 +164,19 @@ class TerminalPuzzle extends Component {
                         </IconButton>
                     </MuiThemeProvider>
                 </div>
-                <div className={ this.state.unlocked ? '' : 'hidden' }>
+                <div id={'terminal'} className={ this.state.unlocked ? '' : 'hidden' }>
                     <ReactTerminal
                         theme={{
                             background: '#141313',
-                            PuzzlePromptSymbolColor: '#81EC0D',
-                            commandColor: '#81EC0D',
+                            promptSymbolColor: '#81EC0D',
+                            commandColor: '#FFFFFF',
                             outputColor: '#FFFFFF',
                             errorOutputColor: '#FF0000',
-                            fontSize: '1.1rem',
+                            fontSize: '1.35rem',
                             spacing: '1%',
-                            fontFamily: 'monospace',
                             height: '50vh',
                         }}
-                        PuzzlePromptSymbol='> '
+                        promptSymbol='user@exploreday$ '
                         emulatorState={ customState } />
                 </div>
             </div>

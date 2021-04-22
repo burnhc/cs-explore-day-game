@@ -1,8 +1,16 @@
+@import url("https://fonts.googleapis.com/css?family=VT323&display=swap");
+
 body {
-    overflow: hidden;
+    margin: 0;
+    overflow-x: hidden;
 }
+
+#terminal * {
+    font-family: "VT323", monospace !important;
+}
+
 code {
-    font-family: Consolas,"courier new";
+    font-family: 'Inconsolata', monospace;
     color: #fc7b5b;
     background-color: #f3f3f3;
     padding: 2px;
@@ -25,7 +33,7 @@ code {
 }
 
 #NavigationRoomRight {
-    overflow-y: scroll;
+    overflow-y: auto;
     padding:50px;
 }
 
@@ -50,7 +58,7 @@ code {
     background-color: #141313;
     color: white;
     height: 50vh;
-    font-family: monospace;
+    font-family: 'Inconsolata', monospace;
     font-size: 1.1rem;
 }
 
@@ -68,7 +76,7 @@ code {
 
 #note {
     font-size: 1.2rem;
-    font-family: monospace;
+    font-family: 'Inconsolata', monospace;
     background-color: #f7edc0;
     color: #f7edc0;
     height: 30vh;
@@ -85,8 +93,9 @@ code {
 #graph-canvas {
     margin: 50px;
     float: left;
+    cursor: pointer;
 }
 
 #graph-desc {
-    overflow-y: auto;
+    overflow: scroll;
 }

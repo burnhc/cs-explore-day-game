@@ -4,6 +4,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import Typography from '@material-ui/core/Typography';
 
 const DOT_RADIUS = 10;
+const SCALE = 0.7;
 
 class GraphPuzzle extends Component {
     constructor(props) {
@@ -11,30 +12,30 @@ class GraphPuzzle extends Component {
         this.state = {
             clickedDot: null,
             dots: new Map(
-                [[1, {x: 26 * 0.7, y: 240 * 0.7}], [2, {x: 325 * 0.7, y: 18 * 0.7}],
-                    [3, {x: 627 * 0.7, y: 240 * 0.7}], [4, {x: 513 * 0.7, y: 592 * 0.7}],
-                    [5, {x: 137 * 0.7, y: 592 * 0.7}], [6, {x: 120 * 0.7, y: 268 * 0.7}],
-                    [7, {x: 240 * 0.7, y: 210 * 0.7}], [8, {x: 323 * 0.7, y: 117 * 0.7}],
-                    [9, {x: 414 * 0.7, y: 213 * 0.7}], [10, {x: 532 * 0.7, y: 269 * 0.7}],
-                    [11, {x: 468 * 0.7, y: 387 * 0.7}], [12, {x: 452 * 0.7, y: 511 * 0.7}],
-                    [13, {x: 323 * 0.7, y: 487 * 0.7}], [14, {x: 196 * 0.7, y: 511 * 0.7}],
-                    [15, {x: 179 * 0.7, y: 379 * 0.7}], [16, {x: 276 * 0.7, y: 263 * 0.7}],
-                    [17, {x: 376 * 0.7, y: 263 * 0.7}], [18, {x: 408 * 0.7, y: 363 * 0.7}],
-                    [19, {x: 322 * 0.7, y: 424 * 0.7}], [20, {x: 239 * 0.7, y: 361 * 0.7}]]),
+                    [[1, {x: 26 * SCALE, y: 240 * SCALE}],  [2,  {x: 325 * SCALE, y: 18 * SCALE}],
+                    [3,  {x: 627 * SCALE, y: 240 * SCALE}], [4,  {x: 513 * SCALE, y: 592 * SCALE}],
+                    [5,  {x: 137 * SCALE, y: 592 * SCALE}], [6,  {x: 120 * SCALE, y: 268 * SCALE}],
+                    [7,  {x: 240 * SCALE, y: 210 * SCALE}], [8,  {x: 323 * SCALE, y: 117 * SCALE}],
+                    [9,  {x: 414 * SCALE, y: 213 * SCALE}], [10, {x: 532 * SCALE, y: 269 * SCALE}],
+                    [11, {x: 468 * SCALE, y: 387 * SCALE}], [12, {x: 452 * SCALE, y: 511 * SCALE}],
+                    [13, {x: 323 * SCALE, y: 487 * SCALE}], [14, {x: 196 * SCALE, y: 511 * SCALE}],
+                    [15, {x: 179 * SCALE, y: 379 * SCALE}], [16, {x: 276 * SCALE, y: 263 * SCALE}],
+                    [17, {x: 376 * SCALE, y: 263 * SCALE}], [18, {x: 408 * SCALE, y: 363 * SCALE}],
+                    [19, {x: 322 * SCALE, y: 424 * SCALE}], [20, {x: 239 * SCALE, y: 361 * SCALE}]]),
             possibleEdges:
-                [{dot1: 1, dot2: 2}, {dot1: 2, dot2: 3},
-                    {dot1: 3, dot2: 4}, {dot1: 4, dot2: 5},
-                    {dot1: 5, dot2: 1}, {dot1: 6, dot2: 7},
-                    {dot1: 7, dot2: 8}, {dot1: 8, dot2: 9},
-                    {dot1: 9, dot2: 10}, {dot1: 10, dot2: 11},
+                    [{dot1: 1, dot2: 2},  {dot1: 2,  dot2: 3},
+                    {dot1: 3,  dot2: 4},  {dot1: 4,  dot2: 5},
+                    {dot1: 5,  dot2: 1},  {dot1: 6,  dot2: 7},
+                    {dot1: 7,  dot2: 8},  {dot1: 8,  dot2: 9},
+                    {dot1: 9,  dot2: 10}, {dot1: 10, dot2: 11},
                     {dot1: 11, dot2: 12}, {dot1: 12, dot2: 13},
                     {dot1: 13, dot2: 14}, {dot1: 14, dot2: 15},
-                    {dot1: 15, dot2: 6}, {dot1: 16, dot2: 17},
+                    {dot1: 15, dot2: 6},  {dot1: 16, dot2: 17},
                     {dot1: 17, dot2: 18}, {dot1: 18, dot2: 19},
-                    {dot1: 19, dot2: 20}, {dot1: 1, dot2: 6},
-                    {dot1: 2, dot2: 8}, {dot1: 3, dot2: 10},
-                    {dot1: 4, dot2: 12}, {dot1: 5, dot2: 14},
-                    {dot1: 7, dot2: 16}, {dot1: 9, dot2: 17},
+                    {dot1: 19, dot2: 20}, {dot1: 1,  dot2: 6},
+                    {dot1: 2,  dot2: 8},  {dot1: 3,  dot2: 10},
+                    {dot1: 4,  dot2: 12}, {dot1: 5,  dot2: 14},
+                    {dot1: 7,  dot2: 16}, {dot1: 9,  dot2: 17},
                     {dot1: 11, dot2: 18}, {dot1: 13, dot2: 19},
                     {dot1: 15, dot2: 20}, {dot1: 20, dot2: 16}],
             visitedDots: this.props.solvedGraphDots,
@@ -291,7 +292,6 @@ class GraphPuzzle extends Component {
                     onClick={!this.state.verified ? this.checkForDot : null}
                     onMouseMove={!this.state.verified ? this.drawDots : null}/>
                     <div id={'graph-desc'}>
-                        <Typography>
                             <p>
                                 Given these dots connected by lines, can we trace a path that touches
                                 all of the dots, but that takes each line only once?
@@ -308,7 +308,6 @@ class GraphPuzzle extends Component {
                                 <b> 2.6525286 * 10<sup>32 </sup></b> permutations for a computer to check, which
                                 would take a very long time!
                             </p>
-                        </Typography>
                     </div>
             </div>
         );

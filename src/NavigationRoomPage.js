@@ -9,18 +9,16 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 const drawerWidth = '50%';
 
 const styles = theme => ({
-    drawer: {
-      width: drawerWidth,
-      position: 'absolute',
-      right: 0,
-    },
-    drawerPaper: {
-      width: drawerWidth,
-    },
-    backdrop: {
-      zIndex: theme.zIndex.drawer + 1,
-      color: '#fff',
-    },
+  drawer: {
+    width: drawerWidth,
+  },
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: '#fff',
+  },
   });
 
   class NavigationRoomPage extends Component {
@@ -57,18 +55,18 @@ const styles = theme => ({
                     sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals">
                 </iframe>
             </div>
-            <Drawer
-              className={classes.drawer}
-              variant="permanent"
-              anchor="right"
-              classes={{
-              paper: classes.drawerPaper,
-              }}>
-              <Toolbar />
-              <div id={'NavigationRoomRight'}>
-                <CheatSheet />
-            </div>
-          </Drawer>
+              <Drawer
+                  className={classes.drawer}
+                  variant="permanent"
+                  anchor="right"
+                  classes={{
+                  paper: classes.drawerPaper,
+                  }}>
+                  <Toolbar />
+                  <div id={'NavigationRoomRight'}>
+                    <CheatSheet />
+                </div>
+              </Drawer>
         </div>
       )
     }
