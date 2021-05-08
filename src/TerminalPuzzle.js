@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ReactTerminal from 'react-terminal-component';
-import { instructionstxt, datatxt, headtxt, linktxt, pathtxt, codepy } from './TerminalFileSystem';
+import { instructionstxt, datatxt, linktxt, pathtxt, codepy } from './TerminalFileSystem';
 import { EmulatorState, OutputFactory, CommandMapping,
          FileSystem, Outputs, defaultCommandMapping } from 'javascript-terminal';
 import "./App.css";
@@ -39,11 +39,9 @@ class TerminalPuzzle extends Component {
                 '/': {canModify: false},
                 '/instructions.txt': {content: instructionstxt},
                 '/TOP_SECRET_FOLDER/data.txt': {content: datatxt},
-                '/TOP_SECRET_FOLDER/head.txt': {content: headtxt},
                 '/TOP_SECRET_FOLDER/AnotherFolder/link.txt': {content: linktxt},
                 '/TOP_SECRET_FOLDER/Folder2/path.txt': {content: pathtxt},
                 '/TOP_SECRET_FOLDER/Folder2/Folder3/code.py': {content: codepy},
-                '/TOP_SECRET_FOLDER/Folder2/Folder3/Folder4': {},
             }),
             'commandMapping': CommandMapping.create({
                 ...defaultCommandMapping,
@@ -172,11 +170,11 @@ class TerminalPuzzle extends Component {
                             commandColor: '#FFFFFF',
                             outputColor: '#FFFFFF',
                             errorOutputColor: '#FF0000',
-                            fontSize: '1.35rem',
+                            fontSize: '1rem',
                             spacing: '1%',
                             height: '50vh',
                         }}
-                        promptSymbol='user@exploreday$ '
+                        promptSymbol='user@csexploreday$ '
                         emulatorState={ customState } />
                 </div>
             </div>

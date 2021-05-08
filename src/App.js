@@ -32,9 +32,7 @@ export default function App() {
             </Typography>
           </Toolbar>
           </AppBar>
-          <Router>
-              <Router />
-          </Router>
+          <Router/>
       </div>
     </MuiThemeProvider>
   );

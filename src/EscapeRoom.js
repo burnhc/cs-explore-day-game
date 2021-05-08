@@ -3,12 +3,16 @@ import TerminalPuzzle from "./TerminalPuzzle";
 import PuzzlePrompt from "./PuzzlePrompt";
 import NotePuzzle from "./NotePuzzle";
 import GraphPuzzle from "./GraphPuzzle";
+import DrawerPuzzle from "./DrawerPuzzle";
 
+const h = 1200
+const w = 1800
 const clickables = new Map([
-    ['door', { x1: 141, y1: 238, x2: 305, y2: 560 }],
+    ['door', { x1: 214.5 / w, y1: 369 / h, x2: 508.5 / w, y2: 907.5 / h}],
     ['computer', { x1: 0.4558333333, y1: 0.36625, x2: 0.6291666667, y2: 0.52875 }],
     ['graph', {x1: 0.305 , y1: 0.3025, x2: 0.429166666667, y2: 0.42 }],
-    ['note', { x1: 0.74, y1: 0.39875, x2: 0.795, y2: 0.4775 }]
+    ['note', { x1: 0.74, y1: 0.39875, x2: 0.795, y2: 0.4775 }],
+    ['drawer', {x1: 748.5 / w, y1: 708 / h, x2: 1227 / w, y2: 778.5 / h }]
 ]);
 
 class HomePage extends Component {
@@ -21,6 +25,8 @@ class HomePage extends Component {
             openComputer: false,
             openNote: false,
             openGraph: false,
+            openDrawer: false,
+            openDoor: false,
 
             // storing state of solved puzzles
             unlockedComputer: false,
@@ -103,6 +109,18 @@ class HomePage extends Component {
                     openGraph: !this.state.openGraph
                 })
                 break;
+            case 'drawer':
+                console.log("clicked drawer");
+                this.setState({
+                    openDrawer: !this.state.openDrawer
+                })
+                break;
+            case 'door':
+                console.log("clicked door");
+                this.setState({
+                    openDoor: !this.state.openDoor
+                })
+                break;
             default:
                 break;
         }
@@ -173,6 +191,12 @@ class HomePage extends Component {
                             solvedGraphDots={ this.state.solvedGraphDots }
                             storeGraphState={ (v,e) => this.storeGraphState(v,e) }
                         />}/>
+                <PuzzlePrompt
+                    open={this.state.openDrawer}
+                    handleClose={() => this.handleToggleDialog('drawer')}
+                    title={"There are some papers in the drawer."}
+                    componentToOpen={<DrawerPuzzle/>}
+                    />
             </div>
         )
     }

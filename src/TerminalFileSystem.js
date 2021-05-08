@@ -116,43 +116,39 @@ dbk9NehwGhdgV1X3T2NdRgVOtwgPbTwFYxMoZUQXcdZZA0sBg0wLjH5BzplfLD42RMNNAzKZ2TLfmBmg
 lIVSQ8vPOUnZOFLaFssBHpqqaVWooQyaNQog4EhAcaNq2hi45YO3itb0aWSqzmZ9qf2aQo2pMgPnElHXzADpH6
 ka3L2jRfFBZcv6N4fmSKKook7q3E8bRMomfUUHJlHN0gpQKtI7EUsOgHrsLrpit39cviogjw1-34lfnsvcxmxn`
 
-const headtxt =
-`The first x lines of data.txt
+const pathtxt =
+`??? = Line x of data.txt
 (Hint: use a terminal command after you find x)`
 
 const linktxt =
 `https://docs.google.com/document/d/e/???/pub
 (Open the link in another browser tab after you find ???)`
 
-const pathtxt =
-'??? = the last line of the result from head.txt'
-
 const codepy =
-`# This code finds the value for x, but we need to
-# fix some errors in the find_x() function! Paste this
-# code into the code editor and run it to see what
-# happens.
+`# This code finds the value for x, but you need to
+# fix the syntax errors in the find_x() function.
 
-def find_x()
+find_x()
 	c = b + a
 	a = 10
 	b = 2
 
 	for i in range 10:
 		c = c + i + 5
-    
+	
 	result = c - 1
 	return result
 
 
-# This code calls the find_x() function to print x
+# This calls the find_x() function to print x.
+# You don't need to change this.
 x = find_x()
 print("x = %d" % x)
 `
 
 const instructionstxt = 
     'Figure out the password by searching for files with clues in this computer.\n' +
-    'There are 5 files scattered in different folders. Use the terminal commands to\n' +
+    'There are 4 files scattered in different folders. Use the terminal commands to\n' +
     'aid your search and keep track of the information that you find. Best of luck!'
 
-export { instructionstxt, datatxt, headtxt, linktxt, pathtxt, codepy }
+export { instructionstxt, datatxt, linktxt, pathtxt, codepy }
