@@ -3,11 +3,11 @@ import LinkButton from './LinkButton';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
-function HomePage() {
+function FinishPage() {
   const classes = useStyles();
-  const pretitle = "Welcome to the CS Explore Day";
-  const title = "Escape Room";
-  const subtitle = "Developed by ACM-W at the University of Washington"
+  const pretitle = "Your team has managed to escape."
+  const title = "Well done! 🎉";
+  const subtitle = "(and Dr. Python is not happy)"
 
   return (
     <div id={"welcome"}>
@@ -21,16 +21,15 @@ function HomePage() {
           <Typography variant={"h4"}>{pretitle}</Typography>
           <Typography className={classes.title}>{title}</Typography>
           <Typography variant={"h5"} className={classes.subtitle}>{subtitle}</Typography>
+          <Typography className={classes.requirements}>Thanks for participating! We hope you enjoyed the activity.</Typography>
         <LinkButton
           className={classes.button}
-          to={'/escaperoom'}
-          color={'primary'}
+          to={'/'}
+          color={'secondary'}
           variant={'contained'}
           disableElevation={true}>
-            Start
+            Return home
         </LinkButton>
-          <Typography className={classes.requirements}>For best performance, use Firefox, Google Chrome, or Microsoft Edge on a desktop computer.</Typography>
-          <Typography className={classes.requirements}>Keep your screen at 100% zoom.</Typography>
       </Grid>
   </Grid>
     </div>
@@ -58,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
     color: '#555',
   },
   button: {
+    marginTop: '40px',
     marginRight: '15px',
     marginLeft: '5px',
     fontSize: '1rem',
@@ -65,4 +65,4 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default HomePage;
+export default FinishPage;

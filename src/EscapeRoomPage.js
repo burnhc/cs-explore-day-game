@@ -8,11 +8,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Instructions from "./Instructions";
 import Fab from '@material-ui/core/Fab';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import {Box, ButtonGroup, DialogContent, IconButton} from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close";
-import { findAllByDisplayValue } from '@testing-library/dom';
+import { ButtonGroup } from "@material-ui/core";
 import CheatSheet from './CheatSheet';
 import { Rnd } from 'react-rnd';
 

@@ -38,10 +38,10 @@ class TerminalPuzzle extends Component {
             'fs': FileSystem.create({
                 '/': {canModify: false},
                 '/instructions.txt': {content: instructionstxt},
-                '/TOP_SECRET_FOLDER/encrypted.txt': {content: datatxt},
-                '/TOP_SECRET_FOLDER/FOLDER1/link.txt': {content: linktxt},
-                '/TOP_SECRET_FOLDER/FOLDER2/password.txt': {content: pathtxt},
-                '/TOP_SECRET_FOLDER/FOLDER2/code.py': {content: codepy},
+                '/TopSecretFolder/encrypted.txt': {content: datatxt},
+                '/TopSecretFolder/Folder1/link.txt': {content: linktxt},
+                '/TopSecretFolder/Folder2/password.txt': {content: pathtxt},
+                '/TopSecretFolder/Folder2/code.py': {content: codepy},
             }),
             'commandMapping': CommandMapping.create({
                 ...defaultCommandMapping,
@@ -52,7 +52,7 @@ class TerminalPuzzle extends Component {
                                 "\nCOMMAND    DESCRIPTION  (replace [] with your file/folder name)\n" +
                                 "------------------------------------------------------------------------------------\n" +
                                 "cat        Use 'cat [fileName]' to show the contents of a file.\n" +
-                                "cd         Use 'cd [folderName]' to open a folder. Use 'cd ..' to go back.\n" +
+                                "cd         Use 'cd [FolderName]' to open a folder. Use 'cd ..' to go back.\n" +
                                 "ls         Use 'ls' to list the files in the folder you're in.\n" +
                                 "pwd        Use 'pwd' to show the path of the folder you're in.\n" +
                                 "head       Use 'head -n [x] [fileName]' to show the first x lines of a file.\n" +
@@ -61,7 +61,7 @@ class TerminalPuzzle extends Component {
                                 "* For simplicity, you should be in the same folder as the file you want to use.\n\n" +
                                 "TIPS: Commands are case-sensitive.\n" +
                                 "      Use UP/DOWN arrow keys to cycle through your command history.\n" +
-                                "      Use TAB to autocomplete commands.\n\n"
+                                "      Use TAB to autocomplete file/folder names.\n\n"
                             )
                         };
                     },
@@ -79,7 +79,7 @@ class TerminalPuzzle extends Component {
                 "Let's get started...\n" +
                 "1. List the files in your current folder:            ls\n" +
                 "2. See the contents of the file 'instructions.txt':  cat instructions.txt\n" +
-                "3. Open the folder 'TOP_SECRET_FOLDER/':             cd TOP_SECRET_FOLDER\n" +
+                "3. Open the folder 'TopSecretFolder/':               cd TopSecretFolder\n" +
                 "4. Check the folder you're in:                       pwd\n\n" +
                 "Type 'help' to see other useful commands and tips! :)\n\n"
           )

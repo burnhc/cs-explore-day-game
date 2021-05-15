@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import "./App.css";
 import Snackbar from '@material-ui/core/Snackbar';
-import Typography from '@material-ui/core/Typography';
+import { SnackbarContent, Typography } from '@material-ui/core';
 
 const DOT_RADIUS = 10;
 const SCALE = 0.7;
@@ -273,17 +273,33 @@ class GraphPuzzle extends Component {
                 <Snackbar
                     anchorOrigin={{vertical: 'top', horizontal: 'center'}}
                     open={this.state.openAlreadyVisitedError}
-                    message="You can only visit each dot once."
                     autoHideDuration={2000}
-                    onClose={() => this.setState({openAlreadyVisitedError: false})}
-                />
+                    onClose={() => this.setState({openAlreadyVisitedError: false})}>
+                    <SnackbarContent style={{
+                        backgroundColor:'white',
+                        color: 'black',
+                    }}
+                    message={"You can only visit each dot once."}
+                    />
+                </Snackbar>
                 <Snackbar
                     anchorOrigin={{vertical: 'top', horizontal: 'center'}}
                     open={this.state.openInvalidEdgeError}
-                    message="Oops, you can't connect these two dots."
                     autoHideDuration={2000}
-                    onClose={() => this.setState({openInvalidEdgeError: false})}
-                />
+                    onClose={() => this.setState({openInvalidEdgeError: false})}>
+                    <SnackbarContent style={{
+                        backgroundColor:'white',
+                        color: 'black',
+                    }}
+                    message={"Oops, you can't connect these two dots."}
+                    />
+                </Snackbar>
+                <div id={"graphpuzzlecontent"}>
+                <Typography variant={'h6'}>Instructions:</Typography>
+                <Typography variant={'body1'}>Select a dot to start a path. Select another dot that's connected
+                            to it by a line to trace the path. Press anywhere away from the dots to clear the current path.
+                            Note: your current path will reset if you close the window.</Typography>
+                <br/>
                 <canvas
                     id={"graph-canvas"}
                     ref={this.canvas}
@@ -292,23 +308,20 @@ class GraphPuzzle extends Component {
                     onClick={!this.state.verified ? this.checkForDot : null}
                     onMouseMove={!this.state.verified ? this.drawDots : null}/>
                     <div id={'graph-desc'}>
-                            <p>
-                                Given these dots connected by lines, can we trace a path that touches
-                                all of the dots, but that takes each line only once?
-                            </p>
-                            <p>
-                                This might seem straightforward to accomplish. But believe it or not, this
+                            <br/>
+                            <Typography variant={'h6'}>"Given these dots connected by lines, can we trace a path that touches
+                                 <b> all</b> of the dots, but that takes each line only <b>once</b>?"</Typography>
+                            <br/>
+                            <Typography variant={'body1'}>
+                            This might seem pretty straightforward. But believe it or not, this
                                 is currently one of the most difficult problems to have a computer solve! It's
-                                known famously as the "Hamiltonian Path" problem, named after mathematician
-                                William Rowan Hamilton who came up with the puzzle in 1857.
-                            </p>
-                            <p>
-                                What makes this problem so complicated is that there are many different paths
-                                a computer would have to try. To be exact, the puzzle on the left has a whopping
-                                <b> 2.6525286 * 10<sup>32 </sup></b> permutations for a computer to check, which
-                                would take a very long time!
-                            </p>
+                                known as the "Hamiltonian Path" problem. What makes it so complicated
+                                is that there are many different path possibilities
+                                a computer would have to check. To be exact, the puzzle on the left would need roughly <b> 2.6525286 * 10<sup>32 </sup></b> computations, which
+                                could take even a computer a long time to perform!
+                            </Typography>
                     </div>
+                </div>
             </div>
         );
     }

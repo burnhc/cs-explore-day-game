@@ -127,24 +127,16 @@ code {
     padding-top: 10px;
 }
 
+#graphpuzzlecontent {
+    margin: 10px;
+    margin-left: 30px;
+    padding-bottom: 20px;
+}
+
 #graph-canvas {
-    margin: 50px;
+    padding-right: 50px;
     float: left;
     cursor: pointer;
-}
-.drawerPage {
-    white-space: pre-wrap;       /* Since CSS 2.1 */
-    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-    white-space: -pre-wrap;      /* Opera 4-6 */
-    white-space: -o-pre-wrap;    /* Opera 7 */
-    word-wrap: break-word;       /* Internet Explorer 5.5+ */
-    background-color: #f7f7f7;
-    padding: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border: 1px solid #ddddd2;
-    border-radius: 7px;
-    font-family: 'Inconsolata', monospace;
 }
 
 #drawerpuzzletop {

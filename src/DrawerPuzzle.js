@@ -1,4 +1,4 @@
-import {DialogContent, Grid, IconButton, Paper, TextField} from "@material-ui/core";
+import {DialogContent, Grid, IconButton, TextField} from "@material-ui/core";
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -9,7 +9,7 @@ import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import CloseIcon from "@material-ui/icons/Close";
 import Card from '@material-ui/core/Card';
-import { ArrowForwardRounded, VpnKey } from "@material-ui/icons";
+import { VpnKey } from "@material-ui/icons";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -86,7 +86,7 @@ export default function DrawerPuzzle(props) {
   };
 
   const verifyPassword = () => {
-    if (passwordInput === 'HelloWorld3') {
+    if (passwordInput === 'Alohomora!') {
         setUnlocked(true);
     }
   }
@@ -95,7 +95,7 @@ export default function DrawerPuzzle(props) {
     <DialogContent>
             <div id={"drawerpuzzletop"}>
         <Box display="flex" alignItems="center">
-          <Box flexGrow={1}>{unlocked ? `You discover some papers in the drawer.` : `You try to open the drawer, but it's locked.`}</Box>
+          <Box flexGrow={1}>{unlocked ? `The drawer opens, and you discover some papers inside.` : `Looks like we need a key.`}</Box>
           <Box>
               <IconButton
                   color={"primary"}
@@ -109,7 +109,7 @@ export default function DrawerPuzzle(props) {
       </div>
       <div id={'keypage'} className={ unlocked ? 'hidden' : '' }>
               <TextField
-                  type="password"
+                  type="text"
                   label="Enter the drawer key"
                   variant="outlined"
                   value={ passwordInput }
@@ -150,17 +150,17 @@ export default function DrawerPuzzle(props) {
           <p><code>decode()</code> is a function that takes two integers <code>x</code> and <code>y</code> 
           and squares the maximum of the two. It then subtracts <code>x + y</code> from it and
           prints the result.</p>
-                  <p>For example, <code>decode(2,3)</code> prints <code>"Result is: 1"</code>.</p>
+                  <p>For example, <code>decode(2,3)</code> prints <code>"4"</code>.</p>
                   <p>Here, x = 2 and y = 3. The maximum of 2 and 3 is 3.
-                    The square of 3 is 3<sup>2</sup> = 6. Finally, 6 - (2 + 3) = 1.</p>
+                    Squaring that gives 3 * 3 = 9. Finally, 9 - (2 + 3) = 4.</p>
           <p>NOTE TO SELF: <b>Make sure the escapers don't find this!</b></p>
           </Card>
         </Grid>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
         <Typography variant={'body1'}>Copy the lines of code into the
-        editor to test them out. Each line is labeled with a number; keep
-        track of the correct order of the numbers.</Typography>
+        editor and piece together the function. Each line is labeled with a number, which you'll
+        need to keep track of the correct order.</Typography>
         <div className={classes.root}>
           <Grid container spacing={3}>
             <Grid item xs={6}>
@@ -202,7 +202,7 @@ export default function DrawerPuzzle(props) {
             <Grid item xs={6}>
               <Card className={classes.card}>
               <Typography className={classes.cardnumber} variant={'body1'}>7</Typography>
-                print("Result is: " + result)
+                print(result)
               </Card>
             </Grid>
             <Grid item xs={6}>

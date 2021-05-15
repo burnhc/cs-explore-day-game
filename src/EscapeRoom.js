@@ -4,6 +4,7 @@ import PuzzlePrompt from "./PuzzlePrompt";
 import NotePuzzle from "./NotePuzzle";
 import GraphPuzzle from "./GraphPuzzle";
 import DrawerPuzzle from "./DrawerPuzzle";
+import DoorPuzzle from './DoorPuzzle';
 
 const h = 1200
 const w = 1800
@@ -169,7 +170,12 @@ class HomePage extends Component {
                         handleClose={() => this.handleToggleDialog('computer')}
                     />
                 </div>
-
+                <PuzzlePrompt
+                    open={this.state.openDoor}
+                    maxWidth={'xs'}
+                    handleClose={() => this.handleToggleDialog('door')}
+                    title={"The handle is locked, but there's a message on the door."}
+                    componentToOpen={<DoorPuzzle/>}/>
                 <PuzzlePrompt
                     open={this.state.openNote}
                     maxWidth={'xs'}
@@ -180,7 +186,7 @@ class HomePage extends Component {
                     ref={this.PuzzlePrompt}
                     open={this.state.openGraph}
                     handleClose={() => this.handleToggleDialog('graph')}
-                    title={"Not your average Connect the Dots..."}
+                    title={ this.state.solvedGraph ? "Good job!" : "Not your average Connect the Dots. (optional puzzle)"}
                     componentToOpen={
                         <GraphPuzzle
                             puzzle={() => this.handlePuzzleSolved('solvedGraph')}
