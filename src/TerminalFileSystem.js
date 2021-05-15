@@ -126,7 +126,7 @@ const linktxt =
 
 const codepy =
 `'''
-This code finds the value for x, but you need to
+This code computes the value x, but you need to
 fix the bugs based on the comments.
 '''
 
@@ -141,8 +141,8 @@ for i in range(9):
 	c = c + i + 5
 
 # prints c - 1
-result = c - 1
-print(result)
+x = c - 1
+print(x)
 `
 
 const instructionstxt = 
