@@ -117,7 +117,7 @@ lIVSQ8vPOUnZOFLaFssBHpqqaVWooQyaNQog4EhAcaNq2hi45YO3itb0aWSqzmZ9qf2aQo2pMgPnElHX
 ka3L2jRfFBZcv6N4fmSKKook7q3E8bRMomfUUHJlHN0gpQKtI7EUsOgHrsLrpit39cviogjw1-34lfnsvcxmxn`
 
 const pathtxt =
-`??? = Line x of data.txt
+`??? = Line x of encrypted.txt
 (Hint: use a terminal command after you find x)`
 
 const linktxt =
@@ -125,30 +125,29 @@ const linktxt =
 (Open the link in another browser tab after you find ???)`
 
 const codepy =
-`# This code finds the value for x, but you need to
-# fix the syntax errors in the find_x() function.
+`'''
+This code finds the value for x, but you need to
+fix the bugs based on the comments.
+'''
 
-find_x()
-	c = b + a
-	a = 10
-	b = 2
+# Adds a + b
+c = a + b
+a = 10
+b = 2
 
-	for i in range 10:
-		c = c + i + 5
-	
-	result = c - 1
-	return result
+# i loops through 0 to 9
+# (hint: what's the value of i at the end of this loop?)
+for i in range(9):
+	c = c + i + 5
 
-
-# This calls the find_x() function to print x.
-# You don't need to change this.
-x = find_x()
-print("x = %d" % x)
+# prints c - 1
+result = c - 1
+print(result)
 `
 
 const instructionstxt = 
     'Figure out the password by searching for files with clues in this computer.\n' +
     'There are 4 files scattered in different folders. Use the terminal commands to\n' +
-    'aid your search and keep track of the information that you find. Best of luck!'
+    'aid your search, and carefully write down information that you find. Best of luck!'
 
 export { instructionstxt, datatxt, linktxt, pathtxt, codepy }

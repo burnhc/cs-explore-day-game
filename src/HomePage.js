@@ -20,24 +20,15 @@ function HomePage() {
           <Typography variant={"h4"}>{pretitle}</Typography>
           <Typography className={classes.title}>{title}</Typography>
           <Typography variant={"h5"} className={classes.subtitle}>{subtitle}</Typography>
-          <Typography variant={"h6"}>Choose your role:</Typography>
         <LinkButton
           className={classes.button}
           to={'/EscapeRoomPage'}
           color={'primary'}
           variant={'contained'}
           disableElevation>
-            Escaper
+            Enter the Escape Room
         </LinkButton>
-        <LinkButton
-          className={classes.button}
-          to={'/NavigationRoomPage'}
-          color={'secondary'}
-          variant={'contained'}
-          disableElevation>
-            Navigator
-        </LinkButton>
-          <Typography className={classes.requirements}>For best performance, use Firefox, Google Chrome, or Microsoft Edge.</Typography>
+          <Typography className={classes.requirements}>For best performance, use Firefox, Google Chrome, or Microsoft Edge on a desktop computer.</Typography>
           <Typography className={classes.requirements}>Keep your screen at 100% zoom.</Typography>
       </Grid>
   </Grid>

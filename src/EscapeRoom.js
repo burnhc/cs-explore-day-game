@@ -156,22 +156,20 @@ class HomePage extends Component {
         return (
             <div>
                 <img
+                    hidden={ this.state.openComputer || this.state.openDrawer }
                     ref={this.image}
                     id={'backgroundImage'}
                     src={ process.env.PUBLIC_URL + "room1.png" }
                     alt="Room1"
                     onClick={(e) => this.handleClickOpen(e)}/>
-                <PuzzlePrompt
-                    open={this.state.openComputer}
-                    handleClose={() => this.handleToggleDialog('computer')}
-                    title={this.state.unlockedComputer ?
-                        "The computer is unlocked, but it looks a bit strange." :
-                        "Seems like the computer is locked."}
-                    componentToOpen={
-                        <TerminalPuzzle
-                            puzzle1={() => this.handlePuzzleSolved('unlockedComputer')}
-                            puzzle1Solved={this.state.unlockedComputer}
-                        />}/>
+                <div className={!this.state.openComputer ? 'hidden' : ''}>
+                    <TerminalPuzzle
+                        puzzle1={() => this.handlePuzzleSolved('unlockedComputer')}
+                        puzzle1Solved={this.state.unlockedComputer}
+                        handleClose={() => this.handleToggleDialog('computer')}
+                    />
+                </div>
+
                 <PuzzlePrompt
                     open={this.state.openNote}
                     maxWidth={'xs'}
@@ -191,12 +189,11 @@ class HomePage extends Component {
                             solvedGraphDots={ this.state.solvedGraphDots }
                             storeGraphState={ (v,e) => this.storeGraphState(v,e) }
                         />}/>
-                <PuzzlePrompt
-                    open={this.state.openDrawer}
-                    handleClose={() => this.handleToggleDialog('drawer')}
-                    title={"There are some papers in the drawer."}
-                    componentToOpen={<DrawerPuzzle/>}
+                <div hidden={!this.state.openDrawer}>
+                    <DrawerPuzzle
+                        handleClose={() => this.handleToggleDialog('drawer')}
                     />
+                </div>
             </div>
         )
     }

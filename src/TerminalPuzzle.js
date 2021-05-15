@@ -5,8 +5,9 @@ import { EmulatorState, OutputFactory, CommandMapping,
          FileSystem, Outputs, defaultCommandMapping } from 'javascript-terminal';
 import "./App.css";
 import { InputAdornment, TextField, createMuiTheme,
-         MuiThemeProvider, IconButton } from "@material-ui/core";
+         MuiThemeProvider, IconButton, Box } from "@material-ui/core";
 import { ArrowForwardRounded, Lock } from "@material-ui/icons";
+import CloseIcon from "@material-ui/icons/Close";
 
 class TerminalPuzzle extends Component {
     constructor(props) {
@@ -16,7 +17,6 @@ class TerminalPuzzle extends Component {
             passwordInput: '',
             passwordError: false
         };
-        console.log(this.state.unlocked);
     }
 
     verifyPassword() {
@@ -38,10 +38,10 @@ class TerminalPuzzle extends Component {
             'fs': FileSystem.create({
                 '/': {canModify: false},
                 '/instructions.txt': {content: instructionstxt},
-                '/TOP_SECRET_FOLDER/data.txt': {content: datatxt},
-                '/TOP_SECRET_FOLDER/AnotherFolder/link.txt': {content: linktxt},
-                '/TOP_SECRET_FOLDER/Folder2/path.txt': {content: pathtxt},
-                '/TOP_SECRET_FOLDER/Folder2/Folder3/code.py': {content: codepy},
+                '/TOP_SECRET_FOLDER/encrypted.txt': {content: datatxt},
+                '/TOP_SECRET_FOLDER/FOLDER1/link.txt': {content: linktxt},
+                '/TOP_SECRET_FOLDER/FOLDER2/password.txt': {content: pathtxt},
+                '/TOP_SECRET_FOLDER/FOLDER2/code.py': {content: codepy},
             }),
             'commandMapping': CommandMapping.create({
                 ...defaultCommandMapping,
@@ -128,10 +128,25 @@ class TerminalPuzzle extends Component {
 
         return (
             <div>
+                <MuiThemeProvider theme={ terminalTheme }>
+                <div id={"terminaltop"} position="fixed">
+                    <Box display="flex" alignItems="center">
+                        <Box flexGrow={1}>Computer Terminal</Box>
+                        <Box>
+                            <IconButton
+                                id={"terminalexitbutton"}
+                                color={"primary"}
+                                size={"small"}
+                                disableRipple
+                                onClick={() => this.props.handleClose()}>
+                                <CloseIcon/>
+                            </IconButton>
+                        </Box>
+                    </Box>
+                </div>
                 <div
                     className={ this.state.unlocked ? 'hidden' : '' }
                     id={ 'computerPasswordPage' }>
-                    <MuiThemeProvider theme={ terminalTheme }>
                         <TextField
                             type="password"
                             label="Password"
@@ -160,7 +175,6 @@ class TerminalPuzzle extends Component {
                             color={"primary"}>
                             <ArrowForwardRounded />
                         </IconButton>
-                    </MuiThemeProvider>
                 </div>
                 <div id={'terminal'} className={ this.state.unlocked ? '' : 'hidden' }>
                     <ReactTerminal
@@ -172,11 +186,12 @@ class TerminalPuzzle extends Component {
                             errorOutputColor: '#FF0000',
                             fontSize: '1rem',
                             spacing: '1%',
-                            height: '50vh',
+                            height: '93vh',
                         }}
                         promptSymbol='user@csexploreday$ '
                         emulatorState={ customState } />
                 </div>
+                </MuiThemeProvider>
             </div>
         );
     }
