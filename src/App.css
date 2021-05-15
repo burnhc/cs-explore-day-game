@@ -103,12 +103,15 @@ code {
 }
 
 .blockText {
-    background-color: #F9F9ED;
     padding: 20px;
     margin-top: 20px;
     margin-bottom: 20px;
-    border: 1px solid #ddddd2;
     border-radius: 7px;
+    font-family: 'Inconsolata', monospace;
+    color: #ff4718;
+    background-color: #f3f3f3;
+    font-size: 105%;
+    white-space: pre;
 }
 
 #note {
