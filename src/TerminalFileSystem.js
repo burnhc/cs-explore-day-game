@@ -141,7 +141,7 @@ for i in range(9):
 	c = c + i + 5
 
 # prints c - 1
-x = c - 1
+x = c + 1
 print(x)
 `
 
